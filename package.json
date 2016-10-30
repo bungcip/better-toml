@@ -4,11 +4,20 @@
     "description": "Better TOML Language support",
     "version": "0.1.0",
     "publisher": "bungcip",
+    "license": "MIT",
+    "homepage": "https://github.com/bungcip/better-toml/blob/master/README.md",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/bungcip/better-toml.git"
+    },
     "engines": {
         "vscode": "^1.5.0"
     },
     "categories": [
         "Languages"
+    ],
+    "keywords": [
+        "toml"
     ],
     "activationEvents": [
         "onLanguage:toml"
