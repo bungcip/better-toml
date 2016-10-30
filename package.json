@@ -1,6 +1,6 @@
 {
     "name": "better-toml",
-    "displayName": "better toml",
+    "displayName": "Better TOML",
     "description": "Better TOML Language support",
     "version": "0.1.0",
     "publisher": "bungcip",
@@ -8,7 +8,7 @@
         "vscode": "^1.5.0"
     },
     "categories": [
-        "Other"
+        "Languages"
     ],
     "activationEvents": [
         "onLanguage:toml"
