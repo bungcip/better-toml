@@ -1,8 +1,8 @@
 {
     "name": "better-toml",
     "displayName": "better toml",
-    "description": "TOML Language support",
-    "version": "0.0.1",
+    "description": "Better TOML Language support",
+    "version": "0.1.0",
     "publisher": "bungcip",
     "engines": {
         "vscode": "^1.5.0"
@@ -11,14 +11,34 @@
         "Other"
     ],
     "activationEvents": [
-        "onCommand:extension.sayHello"
+        "onLanguage:toml"
     ],
     "main": "./out/src/extension",
     "contributes": {
-        "commands": [{
-            "command": "extension.sayHello",
-            "title": "Hello World"
-        }]
+        "languages": [
+            {
+                "id": "toml",
+                "aliases": [
+                    "TOML", "toml"
+                ],
+                "extensions": [
+                    ".toml"
+                ],
+                "mimetypes": [
+                    "text/x-toml"
+                ],
+                "configuration": "./language-configuration.json"
+            }
+        ],
+
+        "grammars": [
+            {
+                "language": "toml",
+                "scopeName": "source.toml",
+                "path": "./syntaxes/TOML.tmLanguage"
+            }
+        ]
+
     },
     "scripts": {
         "vscode:prepublish": "tsc -p ./",
