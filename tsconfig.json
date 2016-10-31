@@ -11,6 +11,9 @@
     },
     "exclude": [
         "node_modules",
-        ".vscode-test"
+        ".vscode-test",
+        ".vscode",
+        "out",
+        "syntaxes"
     ]
 }
