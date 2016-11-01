@@ -4,13 +4,24 @@ Better TOML is vs code extension to support TOML file.
 
 ## Features
 
-- Syntax Hightlight for `.toml` files
+- Syntax Hightlighting for `.toml` files
+
+![Syntax Hightlighting](images/feature_syntax_highlight.png)
+
+- Syntax Validation for invalid input
+
+![Syntax Validation](images/feature_syntax_validation.gif)
+
+
 
 
 ## Release Notes
 
-Current release has same feature as `toml` extension. 
-With support for pressing `ctrl+/` to comment with `#` instead of `//`
+Add syntax validation for `toml` file using `node-toml` parser. 
+
+### 0.2.0
+
+- Add Syntax validation for invalid `.toml` files
 
 ### 0.1.0
 
