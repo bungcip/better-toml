@@ -209,7 +209,7 @@ let languageService = getTomlLanguageService({
 
 // The settings interface describes the server relevant settings part
 interface Settings {
-	json: {
+	toml: {
 		schemas: JSONSchemaSettings[];
 	};
 	http: {
@@ -224,7 +224,7 @@ interface JSONSchemaSettings {
 	schema?: JSONSchema;
 }
 
-let jsonConfigurationSettings: JSONSchemaSettings[] = void 0;
+let tomlConfigurationSettings: JSONSchemaSettings[] = void 0;
 let schemaAssociations: ISchemaAssociations = void 0;
 
 // The settings have changed. Is send on server activation as well.
@@ -232,7 +232,7 @@ connection.onDidChangeConfiguration((change) => {
 	var settings = <Settings>change.settings;
 	configureHttpRequests(settings.http && settings.http.proxy, settings.http && settings.http.proxyStrictSSL);
 
-	jsonConfigurationSettings = settings.json && settings.json.schemas;
+	tomlConfigurationSettings = settings.toml && settings.toml.schemas;
 	updateConfiguration();
 });
 
@@ -258,8 +258,8 @@ function updateConfiguration() {
 			}
 		}
 	}
-	if (jsonConfigurationSettings) {
-		jsonConfigurationSettings.forEach(schema => {
+	if (tomlConfigurationSettings) {
+		tomlConfigurationSettings.forEach(schema => {
 			let uri = schema.url;
 			if (!uri && schema.schema) {
 				uri = schema.schema.id;
