@@ -1,0 +1,164 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "name": "Cargo Manifest",
+    "type": "object",
+    "properties": {
+        "package": {
+            "type": "object",
+            "description": "Crate package description",
+            "additionalProperties": false,
+            "required": [
+                "name",
+                "version",
+                "authors"
+            ],
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "description": "name of package"
+                },
+                "version": {
+                    "type": "string",
+                    "description": "the current version, obeying semver"
+                },
+                "authors": {
+                    "type": "array",
+                    "description": "the author of package",
+                    "items": {
+                        "type": "string",
+                        "minItems": 1
+                    }
+                },
+                "build": {
+                    "type": "string"
+                },
+                "exclude": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "include": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "publish": {
+                    "type": "boolean"
+                },
+                "workspace": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "documentation": {
+                    "type": "string"
+                },
+                "homepage": {
+                    "type": "string",
+                    "description": "Homepage URL for the project.",
+                    "format": "uri"
+                },
+                "repository": {
+                    "type": "string",
+                    "format": "uri"
+                },
+                "readme": {
+                    "type": "string"
+                },
+                "keywords": {
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "description": "A tag/keyword that this package relates to."
+                    }
+                },
+                "license": {
+                    "type": "string"
+                },
+                "license-file": {
+                    "type": "string"
+                },
+                "metadata": {
+                    "type": "object"
+                }
+            }
+        },
+        "dependencies": {
+            "type": "object",
+            "description": "Crate package dependencies",
+            "additionalProperties": {
+                "type": "string"
+            }
+        },
+        "dev-dependencies": {
+            "type": "object",
+            "description": "Crate dependencies needed for development",
+            "additionalProperties": {
+                "type": "string"
+            }
+        },
+        "target.*.dependencies": {
+            "type": "object",
+            "description": "Crate package dependencies",
+            "additionalProperties": {
+                "type": "string"
+            }
+        },
+        "profile.*": {
+            "type": "object",
+            "description": "Build Profile",
+            "additionalProperties": false,
+            "properties": {
+                "opt-level": {
+                    "type": "string",
+                    "description": "control the --opt-level the compiler builds with"
+                },
+                "debug": {
+                    "type": "boolean",
+                    "description": "controls whether the compiler passes `-g`"
+                },
+                "rpath": {
+                    "type": "boolean",
+                    "description": "controls whether the compiler passes `-C rpath`"
+                },
+                "lto": {
+                    "type": "boolean",
+                    "description": "controls `-C lto` for binaries and staticlibs"
+                },
+                "debug-assertions": {
+                    "type": "boolean",
+                    "description": "controls whether debug assertions are enabled"
+                },
+                "codegen-units": {
+                    "type": "number",
+                    "description": "controls whether the compiler passes `-C codegen-units`, `codegen-units` is ignored when `lto = true`"
+                },
+                "panic": {
+                    "type": "string",
+                    "description": "panic strategy (`-C panic=...`), can also be 'abort'",
+                    "default": "unwind",
+                    "enum": [
+                        "unwind", "abort"
+                    ]
+                }
+            }
+        },
+        "replace": {
+            "type": "object"
+        },
+        "features": {
+            "type": "object"
+        },
+        "workspace": {
+            "type": "object",
+            "properties": {
+                "members": {
+                    "type":"array"
+                }
+            }
+        }
+    }
+}
