@@ -2,7 +2,7 @@
   "name": "better-toml",
   "displayName": "Better TOML",
   "description": "Better TOML Language support",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "publisher": "bungcip",
   "license": "MIT",
   "homepage": "https://github.com/bungcip/better-toml/blob/master/README.md",
@@ -100,18 +100,20 @@
     "postinstall": "node ./node_modules/vscode/bin/install"
   },
   "dependencies": {
-    "request-light": "^0.1.0",
-    "toml": "^2.3.0",
-    "vscode-languageclient": "^2.6.2",
-    "vscode-languageserver": "^2.6.1",
-    "vscode-json-languageservice": "^1.1.7",
-    "vscode-nls": "^2.0.1"
+    "request-light": "^0.2.0",
+    "node-fetch": "^1.6.3",
+    "toml": "^2.3.2",
+    "vscode-languageclient": "^3.0.4",
+    "vscode-languageserver": "^3.0.5",
+    "vscode-json-languageservice": "^2.0.1",
+    "vscode-nls": "^2.0.2"
   },
   "devDependencies": {
-    "typescript": "^2.0.6",
+    "typescript": "^2.1.6",
     "vscode": "^1.0.3",
-    "mocha": "^3.1.2",
-    "@types/node": "^6.0.46",
-    "@types/mocha": "^2.2.32"
+    "mocha": "^3.2.0",
+    "@types/node": "^7.0.5",
+    "@types/mocha": "^2.2.39",
+    "@types/node-fetch": "1.6.7"
   }
 }
