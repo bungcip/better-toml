@@ -18,13 +18,17 @@ import URI from './utils/uri';
 import * as URL from 'url';
 import Strings = require('./utils/strings');
 import { JSONDocument, JSONSchema, LanguageSettings, LanguageServiceParams, LanguageService, getLanguageService } from 'vscode-json-languageservice';
-import { ProjectJSONContribution } from './jsoncontributions/projectJSONContribution';
-import { GlobPatternContribution } from './jsoncontributions/globPatternContribution';
+import { CargoTOMLContribution } from './tomlcontributions/cargoTOMLContribution';
+// import { ProjectJSONContribution } from './jsoncontributions/projectJSONContribution';
+// import { GlobPatternContribution } from './jsoncontributions/globPatternContribution';
 import { FileAssociationContribution } from './jsoncontributions/fileAssociationContribution';
 import { getLanguageModelCache } from './languageModelCache';
 
-import * as toml from 'toml';
-import {TomlSyntaxError} from 'toml';
+// import * as toml from 'toml';
+// import {TomlSyntaxError} from 'toml';
+
+import * as bombadil from '@sgarciac/bombadil';
+import * as ct from 'ct';
 
 import * as nls from 'vscode-nls';
 nls.config(process.env['VSCODE_NLS_CONFIG']);
@@ -69,9 +73,9 @@ connection.onInitialize((params: InitializeParams): InitializeResult => {
 		capabilities: {
 			// Tell the client that the server works in FULL text document sync mode
 			textDocumentSync: documents.syncKind,
-			// completionProvider: { resolveProvider: true, triggerCharacters: ['"', ':'] },
-			// hoverProvider: true,
-			// documentSymbolProvider: true,
+			completionProvider: { resolveProvider: true, triggerCharacters: ['"', '='] },
+			hoverProvider: true,
+			documentSymbolProvider: true,
 			// documentRangeFormattingProvider: !params.initializationOptions || params.initializationOptions['format.enable']
 		}
 	};
@@ -116,7 +120,7 @@ let schemaRequestService = (uri: string): Thenable<string> => {
 
 type TOMLDocument = {
     json: Object,
-    errors: [TomlSyntaxError]
+	errors: [bombadil.TomlError]
 };
 
 interface TomlLanguageService extends LanguageService {
@@ -128,13 +132,15 @@ interface TomlLanguageService extends LanguageService {
 function parseTOML(input: string): TOMLDocument {
     let tomlDocument = {};
 
-    try {
-        tomlDocument['json'] = toml.parse(input);
+		let reader = new bombadil.TomlReader;
+		reader.readToml(input);
+
+	if(reader.result != null){
+        tomlDocument['json'] = reader.result;
         tomlDocument['errors'] = [];
-    }catch(e){
-        const ex : TomlSyntaxError = e;
+    }else{
         tomlDocument['json'] = {};
-        tomlDocument['errors'] = [ex];
+        tomlDocument['errors'] = reader.errors;
     }
 
     return tomlDocument as TOMLDocument;
@@ -142,57 +148,57 @@ function parseTOML(input: string): TOMLDocument {
 
 /// helper function to get language service
 function getTomlLanguageService(params: LanguageServiceParams): TomlLanguageService {
-    let jsonLs = getLanguageService(params);
-
     /// setup toml ls
-    let tomlLs = {
-        configure: jsonLs.configure,
-		resetSchema: jsonLs.resetSchema,
+    let jsonLs = getLanguageService(params);
+	let tomlLs = Object.assign({}, jsonLs, {
+        parseTOMLDocument: (document: TextDocument) => parseTOML(document.getText()),
 		doValidation: (textDocument: TextDocument, tomlDocument: TOMLDocument) => {
             let diagnostics = [];
 
             /// validate toml first
             if(tomlDocument.errors.length > 0){
-                let ex = tomlDocument.errors[0];
+				let ex = tomlDocument.errors[0];
+				let start = {line: 0, column: 0};
+				let end = {line:0, column: 1};
+				let message = ex.message;
 
-                // toml parser give position in one based, but languageserver used zero based
-                // so we must convert it before send the position
-                const startPosition = {line: ex.line - 1, character: ex.column};
-                const endPosition = {line: ex.line - 1, character: ex.column + 1};
+				if(ex.hasOwnProperty('line')){
+					// toml parser give position in one based, but languageserver used zero based
+					// so we must convert it before send the position
+					start = {line: ex['line'] - 1, column: ex['column'] - 1};
+					end = {line: ex['line'] - 1, column: ex['column'] + ex['length']};
+				}else if (ex.hasOwnProperty('token')){
+					let token = ex['token'];
+					start = {line: token.line - 1, column: token.column - 1};
+					end = {line: token.line - 1, column: token.column - 1 + token.length};
+				}else {
 
-                diagnostics.push({
-                    severity: DiagnosticSeverity.Error,
-                    range: {
-                        start: startPosition,
-                        end: endPosition
-                    },
-                    message: ex.message,
-                    source: 'Toml Parser'
-                });
+				}
+
+				diagnostics.push({
+					severity: DiagnosticSeverity.Error,
+					range: {start, end},
+					message: message,
+					source: 'Toml Parser'
+				});
+
 
                 return Promise.resolve(diagnostics);
-            }
+			}
+			
+			return Promise.resolve();
 
-            /// convert to json string because we want to use json schema validation...
-            /// basically we convert TOML -> JS Object -> JSON String -> JSON AST
-            let jsonString = JSON.stringify(tomlDocument.json);
-            console.log(jsonString);
+            // /// convert to json string because we want to use json schema validation...
+            // /// basically we convert TOML -> JS Object -> JSON String -> JSON AST
+            // let jsonString = JSON.stringify(tomlDocument.json);
+            // let facade = {
+            //     getText: () => jsonString
+            // };
+            // let jsonDocument = jsonLs.parseJSONDocument(facade as TextDocument);
 
-            let facade = {
-                getText: () => jsonString
-            };
-            let jsonDocument = jsonLs.parseJSONDocument(facade as TextDocument);
-
-            return jsonLs.doValidation(textDocument, jsonDocument);
+            // return jsonLs.doValidation(textDocument, jsonDocument);
         },
-		parseJSONDocument: jsonLs.parseJSONDocument,
-		doResolve: jsonLs.doResolve,
-		doComplete: jsonLs.doComplete,
-		findDocumentSymbols: jsonLs.findDocumentSymbols,
-		doHover: jsonLs.doHover,
-		format: jsonLs.format,
-        parseTOMLDocument: (document: TextDocument) => parseTOML(document.getText()),
-    }
+	});
     
     return tomlLs;
 }
@@ -205,6 +211,7 @@ let languageService = getTomlLanguageService({
 		// new ProjectJSONContribution(),
 		// new GlobPatternContribution(),
 		// filesAssociationContribution
+		new CargoTOMLContribution()
 	]
 });
 
@@ -344,8 +351,6 @@ connection.onDidChangeWatchedFiles((change) => {
 let tomlDocuments = getLanguageModelCache<TOMLDocument>(10, 60, document => languageService.parseTOMLDocument(document));
 
 /// TOML
-// let tomlDocuments = getLanguageModelCache<TomlDocument>(10, 10, );
-
 function getTOMLDocument(document: TextDocument): TOMLDocument {
 	return tomlDocuments.get(document);
 }
