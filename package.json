@@ -101,19 +101,19 @@
   },
   "dependencies": {
     "@sgarciac/bombadil": "0.0.5",
-    "node-fetch": "^1.7.1",
+    "node-fetch": "^1.7.3",
     "request-light": "^0.2.1",
-    "vscode-json-languageservice": "^2.0.12",
-    "vscode-languageclient": "^3.3.0",
-    "vscode-languageserver": "^3.3.0",
+    "vscode-json-languageservice": "^2.0.16",
+    "vscode-languageclient": "^3.4.2",
+    "vscode-languageserver": "^3.4.2",
     "vscode-nls": "^2.0.2"
   },
   "devDependencies": {
-    "@types/mocha": "^2.2.41",
-    "@types/node": "^7.0.39",
+    "@types/mocha": "^2.2.43",
+    "@types/node": "^8.0.28",
     "@types/node-fetch": "1.6.7",
-    "mocha": "^3.4.2",
-    "typescript": "^2.4.2",
-    "vscode": "^1.1.4"
+    "mocha": "^3.5.1",
+    "typescript": "^2.5.2",
+    "vscode": "^1.1.5"
   }
 }
