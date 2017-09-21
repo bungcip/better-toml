@@ -2,7 +2,7 @@
     "name": "better-toml",
     "displayName": "Better TOML",
     "description": "Better TOML Language support",
-    "version": "0.2.0",
+    "version": "0.3.0",
     "publisher": "bungcip",
     "license": "MIT",
     "homepage": "https://github.com/bungcip/better-toml/blob/master/README.md",
@@ -11,9 +11,9 @@
         "url": "https://github.com/bungcip/better-toml.git"
     },
     "bugs": {
-		"url": "https://github.com/bungcip/better-toml/issues",
-		"email": "bungcip@gmail.com"
-	},
+        "url": "https://github.com/bungcip/better-toml/issues",
+        "email": "bungcip@gmail.com"
+    },
     "engines": {
         "vscode": "^1.5.0"
     },
@@ -32,7 +32,8 @@
             {
                 "id": "toml",
                 "aliases": [
-                    "TOML", "toml"
+                    "TOML",
+                    "toml"
                 ],
                 "extensions": [
                     ".toml"
@@ -43,7 +44,6 @@
                 "configuration": "./language-configuration.json"
             }
         ],
-
         "grammars": [
             {
                 "language": "toml",
@@ -51,7 +51,6 @@
                 "path": "./syntaxes/TOML.tmLanguage"
             }
         ]
-
     },
     "scripts": {
         "vscode:prepublish": "tsc -p ./",
@@ -61,10 +60,10 @@
     "dependencies": {
         "vscode-languageclient": "^2.6.0",
         "vscode-languageserver": "^2.6.0",
-        "toml": "^2.3.0"
+        "toml": "^2.3.3"
     },
     "devDependencies": {
-        "typescript": "^2.0.6",
+        "typescript": "2.5.2",
         "vscode": "^1.0.3",
         "mocha": "^3.1.2",
         "@types/node": "^6.0.46",
