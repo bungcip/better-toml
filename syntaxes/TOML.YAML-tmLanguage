@@ -37,20 +37,13 @@ repository:
         match: '\s*((#).*)$'
     dataTypes:
         patterns:
-            -
-                include: '#inlinetable'
-            -
-                include: '#array'
-            -
-                include: '#string'
-            -
-                include: '#dateTime'
-            -
-                include: '#float'
-            -
-                include: '#integer'
-            -
-                include: '#boolean'
+            - include: '#inlinetable'
+            - include: '#array'
+            - include: '#string'
+            - include: '#dateTime'
+            - include: '#float'
+            - include: '#integer'
+            - include: '#boolean'
     dateTime:
         captures:
             '1':
@@ -79,10 +72,8 @@ repository:
             '1':
                 name: punctuation.definition.inlinetable.toml
         patterns:
-            -
-                include: '#keys'
-            -
-                include: '#dataTypes'
+            - include: '#keys'
+            - include: '#dataTypes'
     integer:
         captures:
             '1':
@@ -132,43 +123,23 @@ repository:
                 comment: 'basic string line'
                 match: '"[^"\\]*(?:\\.[^"\\]*)*"'
                 name: string.quoted.single.basic.line.toml
+
     tables:
         patterns:
             -
-                begin: '^\s*(\[\[\]\]|\[\[\..*\]\]|\[\[.*\.\]\]|\[\[.*\.\..*\]\]|\[\[.*[\[\]#].*\]\]|\[\[.*\]\].+\n)'
-                comment: 'non-empty etc. like tables, see below!'
-                end: '(?=^\s*\[?\[.*\]\]?)'
-                name: invalid.illegal.table.array.toml
-            -
-                begin: '^\s*(\[\[)([A-Za-z_\-][A-Za-z0-9_\-\.]*)(\]\])\s*'
-                beginCaptures:
-                    '1': {name: punctuation.definition.table.array.toml}
-                    '2': {name: entity.other.attribute-name.table.array.toml}
-                    '3': {name: punctuation.definition.table.array.toml}
-                comment: 'A named TOML-Table-Array'
-                end: '(?=^\s*\[?\[[A-Za-z_\-][A-Za-z0-9_\-\.]*\]\]?)'
-                name: meta.tag.table.array.toml
-                patterns:
-                    - {include: '#comments'}
-                    - {include: '#keys'}
-                    - {include: '#illegal'}
-            -
-                begin: '^\s*(\[\]|\[\..*\]|\[.*\.\]|\[.*\.\..*\]|\[.*[\[\]#].*\]|\[.*\].+\n)'
-                comment: 'Each table name segment must be non-empty, must not contain the characters ''['', '']'' or ''#'' and is delimited by a ''.''.  Tables "appear in square brackets *on a line by themselves*"'
-                end: '(?=^\s*\[?\[.*\]\]?)'
-                name: invalid.illegal.table.toml
-            -
-                begin: '^\s*(\[)([A-Za-z_\-][A-Za-z0-9_\-\.]*)(\])\s*'
-                beginCaptures:
+                captures:
                     '1': {name: punctuation.definition.table.toml}
-                    '2': {name: entity.other.attribute-name.table.toml}
+                    '2': {patterns: [{match: '[^\s.]+', name: entity.other.attribute-name.table.toml}]}
                     '3': {name: punctuation.definition.table.toml}
-                comment: 'A named TOML-Table'
-                end: '(?=^\s*\[?\[[A-Za-z_\-][A-Za-z0-9_\-\.]*\]\]?)'
+                match: '^\s*(\[)([^\[\]]*)(\])'
                 name: meta.tag.table.toml
-                patterns:
-                    - {include: '#comments'}
-                    - {include: '#keys'}
-                    - {include: '#illegal'}
+            -
+                captures:
+                    '1': {name: punctuation.definition.table.array.toml}
+                    '2': {patterns: [{match: '[^\s.]+', name: entity.other.attribute-name.table.array.toml}]}
+                    '3': {name: punctuation.definition.table.array.toml}
+                match: '^\s*(\[\[)([^\[\]]*)(\]\])'
+                name: meta.tag.table.array.toml
+                
 scopeName: source.toml
 uuid: ffffeb76-439f-4c5e-b60f-d8a13606d63d
