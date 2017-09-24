@@ -119,7 +119,15 @@
           </dict>
           <dict>
             <key>include</key>
+            <string>#dateTimeWithTz</string>
+          </dict>
+          <dict>
+            <key>include</key>
             <string>#dateTime</string>
+          </dict>
+          <dict>
+            <key>include</key>
+            <string>#date</string>
           </dict>
           <dict>
             <key>include</key>
@@ -135,6 +143,21 @@
           </dict>
         </array>
       </dict>
+      <key>dateTimeWithTz</key>
+      <dict>
+        <key>captures</key>
+        <dict>
+          <key>1</key>
+          <dict>
+            <key>name</key>
+            <string>constant.other.datetime-with-timezone.toml</string>
+          </dict>
+        </dict>
+        <key>comment</key>
+        <string>DateTime</string>
+        <key>match</key>
+        <string>(?&lt;!\w)(\d{4}\-\d{2}\-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?(?:Z|[\+\-]\d{2}:\d{2}))(?!\w)</string>
+      </dict>
       <key>dateTime</key>
       <dict>
         <key>captures</key>
@@ -148,7 +171,22 @@
         <key>comment</key>
         <string>DateTime</string>
         <key>match</key>
-        <string>(?&lt;!\w)(\d{4}\-\d{2}\-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?(?:Z|[\+\-]\d{2}:\d{2}))(?!\w)</string>
+        <string>(\d{4}\-\d{2}\-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?)</string>
+      </dict>
+      <key>date</key>
+      <dict>
+        <key>captures</key>
+        <dict>
+          <key>1</key>
+          <dict>
+            <key>name</key>
+            <string>constant.other.date.toml</string>
+          </dict>
+        </dict>
+        <key>comment</key>
+        <string>DateTime</string>
+        <key>match</key>
+        <string>(\d{4}\-\d{2}\-\d{2})</string>
       </dict>
       <key>float</key>
       <dict>
@@ -163,7 +201,7 @@
         <key>comment</key>
         <string>Float, decimal and exponential representation</string>
         <key>match</key>
-        <string>(?&lt;!\w)([\+\-]?(?:[1-9][0-9]*|0)(?:(?:\.[0-9]*)?[eE][\+\-]?[1-9][0-9]*|(?:\.[0-9]*)))(?!\w)</string>
+        <string>(?&lt;!\w)([\+\-]?(0|([1-9](([0-9]|_[0-9])+)?))(?:(?:\.(0|([1-9](([0-9]|_[0-9])+)?)))?[eE][\+\-]?[1-9]_?[0-9]*|(?:\.[0-9_]*)))(?!\w)</string>
       </dict>
       <key>illegal</key>
       <dict>
@@ -227,7 +265,7 @@
         <key>comment</key>
         <string>Integer (with and without + and - prefixes)</string>
         <key>match</key>
-        <string>(?&lt;!\w)((?:[\+\-]?[1-9][0-9]*|0))(?!\w)</string>
+        <string>(?&lt;!\w)((?:[\+\-]?(0|([1-9](([0-9]|_[0-9])+)?))))(?!\w)</string>
       </dict>
       <key>keys</key>
       <dict>
@@ -322,9 +360,15 @@
             <array>
               <dict>
                 <key>match</key>
-                <string>[^"\\]*(?:\\.?[^"\\]*)*</string>
+                <string>\\([btnfr"\\ \n]|u[0-9A-Fa-f]{4}|U[0-9A-Fa-f]{8})</string>
                 <key>name</key>
-                <string>string.quoted.triple.basic.block.toml</string>
+                <string>constant.character.escape.toml</string>
+              </dict>
+              <dict>
+                <key>match</key>
+                <string>\\[^btnfr"\\\n]</string>
+                <key>name</key>
+                <string>invalid.illegal.escape.toml</string>
               </dict>
             </array>
           </dict>

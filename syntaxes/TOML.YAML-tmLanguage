@@ -40,22 +40,39 @@ repository:
             - include: '#inlinetable'
             - include: '#array'
             - include: '#string'
+            - include: '#dateTimeWithTz'
             - include: '#dateTime'
+            - include: '#date'
             - include: '#float'
             - include: '#integer'
             - include: '#boolean'
+    dateTimeWithTz:
+        captures:
+            '1':
+                name: constant.other.datetime-with-timezone.toml
+        comment: DateTime
+        match: '(?<!\w)(\d{4}\-\d{2}\-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?(?:Z|[\+\-]\d{2}:\d{2}))(?!\w)'
+        #match: '(?<!\w)(\d{4}\-\d{2}\-\d{2}(T\d{2}:\d{2}:\d{2}(?:\.\d+)|(?:Z|[\+\-]\d{2}:\d{2}))?)?)(?!\w)'
     dateTime:
         captures:
             '1':
                 name: constant.other.datetime.toml
         comment: DateTime
-        match: '(?<!\w)(\d{4}\-\d{2}\-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?(?:Z|[\+\-]\d{2}:\d{2}))(?!\w)'
+        match: '(\d{4}\-\d{2}\-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?)'
+    date:
+        captures:
+            '1':
+                name: constant.other.date.toml
+        comment: DateTime
+        match: '(\d{4}\-\d{2}\-\d{2})'
+        
     float:
         captures:
             '1':
                 name: constant.numeric.float.toml
         comment: 'Float, decimal and exponential representation'
-        match: '(?<!\w)([\+\-]?(?:[1-9][0-9]*|0)(?:(?:\.[0-9]*)?[eE][\+\-]?[1-9][0-9]*|(?:\.[0-9]*)))(?!\w)'
+        # match: '(?<!\w)([\+\-]?(?:[1-9][0-9]*|0)(?:(?:\.[0-9]*)?[eE][\+\-]?[1-9][0-9]*|(?:\.[0-9]*)))(?!\w)'
+        match: '(?<!\w)([\+\-]?(0|([1-9](([0-9]|_[0-9])+)?))(?:(?:\.(0|([1-9](([0-9]|_[0-9])+)?)))?[eE][\+\-]?[1-9]_?[0-9]*|(?:\.[0-9_]*)))(?!\w)'
     illegal:
         captures:
             '1':
@@ -79,7 +96,7 @@ repository:
             '1':
                 name: constant.numeric.integer.toml
         comment: 'Integer (with and without + and - prefixes)'
-        match: '(?<!\w)((?:[\+\-]?[1-9][0-9]*|0))(?!\w)'
+        match: '(?<!\w)((?:[\+\-]?(0|([1-9](([0-9]|_[0-9])+)?))))(?!\w)'
     keys:
         comment: Key-value-pairs
         patterns:
@@ -118,7 +135,8 @@ repository:
                 end: '"""'
                 name: string.quoted.triple.basic.block.toml
                 patterns:
-                    - {match: '[^"\\]*(?:\\.?[^"\\]*)*', name: string.quoted.triple.basic.block.toml}
+                    - {match: '\\([btnfr"\\ \n]|u[0-9A-Fa-f]{4}|U[0-9A-Fa-f]{8})', name: constant.character.escape.toml}
+                    - {match: '\\[^btnfr"\\\n]', name: invalid.illegal.escape.toml}
             -
                 comment: 'basic string line'
                 match: '"[^"\\]*(?:\\.[^"\\]*)*"'
