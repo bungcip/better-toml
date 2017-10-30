@@ -18,7 +18,7 @@ import URI from './utils/uri';
 import * as URL from 'url';
 import Strings = require('./utils/strings');
 import { JSONDocument, JSONSchema, LanguageSettings, LanguageServiceParams, LanguageService, getLanguageService } from 'vscode-json-languageservice';
-import { CargoTOMLContribution } from './tomlcontributions/cargoTOMLContribution';
+// import { CargoTOMLContribution } from './tomlcontributions/cargoTOMLContribution';
 // import { ProjectJSONContribution } from './jsoncontributions/projectJSONContribution';
 // import { GlobPatternContribution } from './jsoncontributions/globPatternContribution';
 import { FileAssociationContribution } from './jsoncontributions/fileAssociationContribution';

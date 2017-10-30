@@ -38,4 +38,8 @@ declare module "ct" {
         message: string
     }
 
+    export interface Token {
+        
+    }
+
 }
