@@ -23,10 +23,6 @@
         <key>include</key>
         <string>#keys</string>
       </dict>
-      <dict>
-        <key>include</key>
-        <string>#illegal</string>
-      </dict>
     </array>
     <key>repository</key>
     <dict>

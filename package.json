@@ -49,6 +49,13 @@
                 "language": "toml",
                 "scopeName": "source.toml",
                 "path": "./syntaxes/TOML.tmLanguage"
+            },
+            {
+                "scopeName": "markdown.toml.frontmatter.codeblock",
+                "path": "./syntaxes/TOML.frontMatter.tmLanguage",
+                "injectTo": [
+                    "text.html.markdown"
+                ]
             }
         ]
     },
