@@ -2,7 +2,9 @@
     "name": "better-toml",
     "displayName": "Better TOML",
     "description": "Better TOML Language support",
-    "version": "0.3.1",
+    "author": "Gigih Aji Ibrahim <bungcip@gmail.com>",
+    "icon": "icon.png",
+    "version": "0.3.2",
     "publisher": "bungcip",
     "license": "MIT",
     "homepage": "https://github.com/bungcip/better-toml/blob/master/README.md",
@@ -15,7 +17,7 @@
         "email": "bungcip@gmail.com"
     },
     "engines": {
-        "vscode": "^1.5.0"
+        "vscode": "^1.18.0"
     },
     "categories": [
         "Languages"
