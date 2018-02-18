@@ -60,41 +60,43 @@
         ]
       }
     ],
-    "id": "toml",
-    "order": 30,
-    "type": "object",
-    "title": "TOML",
-    "properties": {
-      "toml.schemas": {
-        "type": "array",
-        "description": "Associate schemas to TOML files in the current project",
-        "items": {
-          "type": "object",
-          "default": {
-            "fileMatch": [
-              "{{/myfile}}"
-            ],
-            "url": "{{schemaURL}}"
-          },
-          "properties": {
-            "url": {
-              "type": "string",
-              "default": "/user.schema.json",
-              "description": "A URL to a schema or a relative path to a schema in the current directory"
+    "configuration": {
+      "id": "toml",
+      "order": 30,
+      "type": "object",
+      "title": "TOML",
+      "properties": {
+        "toml.schemas": {
+          "type": "array",
+          "description": "Associate schemas to TOML files in the current project",
+          "items": {
+            "type": "object",
+            "default": {
+              "fileMatch": [
+                "{{/myfile}}"
+              ],
+              "url": "{{schemaURL}}"
             },
-            "fileMatch": {
-              "type": "array",
-              "items": {
+            "properties": {
+              "url": {
                 "type": "string",
-                "default": "MyFile.toml",
-                "description": "A file pattern that can contain '*' to match against when resolving TOML files to schemas."
+                "default": "/user.schema.json",
+                "description": "A URL to a schema or a relative path to a schema in the current directory"
               },
-              "minItems": 1,
-              "description": "An array of file patterns to match against when resolving TOML files to schemas."
-            },
-            "schema": {
-              "$ref": "http://json-schema.org/draft-04/schema#",
-              "description": "The schema definition for the given URL. The schema only needs to be provided to avoid accesses to the schema URL."
+              "fileMatch": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "default": "MyFile.toml",
+                  "description": "A file pattern that can contain '*' to match against when resolving TOML files to schemas."
+                },
+                "minItems": 1,
+                "description": "An array of file patterns to match against when resolving TOML files to schemas."
+              },
+              "schema": {
+                "$ref": "http://json-schema.org/draft-04/schema#",
+                "description": "The schema definition for the given URL. The schema only needs to be provided to avoid accesses to the schema URL."
+              }
             }
           }
         }
@@ -108,19 +110,19 @@
   },
   "dependencies": {
     "@sgarciac/bombadil": "0.0.6",
-    "node-fetch": "^1.7.3",
-    "request-light": "^0.2.1",
-    "vscode-json-languageservice": "^2.0.22",
-    "vscode-languageclient": "^3.4.5",
-    "vscode-languageserver": "^3.4.3",
-    "vscode-nls": "^2.0.2"
+    "node-fetch": "^2.0.0",
+    "request-light": "^0.2.2",
+    "vscode-json-languageservice": "^3.0.7",
+    "vscode-languageclient": "^3.5.0",
+    "vscode-languageserver": "^3.5.0",
+    "vscode-nls": "^3.2.1"
   },
   "devDependencies": {
-    "@types/mocha": "^2.2.44",
-    "@types/node": "^8.0.47",
+    "@types/mocha": "^2.2.48",
+    "@types/node": "^9.4.6",
     "@types/node-fetch": "1.6.7",
-    "mocha": "^4.0.1",
-    "typescript": "^2.5.3",
-    "vscode": "^1.1.6"
+    "mocha": "^5.0.1",
+    "typescript": "^2.7.2",
+    "vscode": "^1.1.10"
   }
 }
