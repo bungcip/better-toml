@@ -12,3 +12,6 @@ Better TOML is vs code extension to support TOML file.
 
 ![Syntax Validation](images/feature_syntax_validation.gif)
 
+- Syntax Hightligting for markdown frontmatter
+
+![Frontmatter](images/feature_frontmatter.gif)

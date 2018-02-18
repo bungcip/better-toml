@@ -6,7 +6,6 @@ patterns:
     - include: '#comments'
     - include: '#tables'
     - include: '#keys'
-    - include: '#illegal'
 repository:
     array:
         begin: '(?<!\w)(\[)\s*'
