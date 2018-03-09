@@ -38,7 +38,8 @@
           "toml"
         ],
         "extensions": [
-          ".toml"
+          ".toml",
+          "Pipfile"
         ],
         "mimetypes": [
           "text/x-toml"
