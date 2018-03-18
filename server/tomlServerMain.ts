@@ -30,8 +30,6 @@ import { getLanguageModelCache } from './languageModelCache';
 import * as bombadil from '@sgarciac/bombadil';
 import * as ct from 'ct';
 
-import * as nls from 'vscode-nls';
-nls.config(process.env['VSCODE_NLS_CONFIG']);
 
 interface ISchemaAssociations {
 	[pattern: string]: string[];
@@ -211,7 +209,7 @@ let languageService = getTomlLanguageService({
 		// new ProjectJSONContribution(),
 		// new GlobPatternContribution(),
 		// filesAssociationContribution
-		new CargoTOMLContribution()
+		// new CargoTOMLContribution()
 	]
 });
 

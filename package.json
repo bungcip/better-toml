@@ -110,20 +110,19 @@
     "postinstall": "node ./node_modules/vscode/bin/install"
   },
   "dependencies": {
-    "@sgarciac/bombadil": "0.0.6",
-    "node-fetch": "^2.0.0",
+    "@sgarciac/bombadil": "0.0.7",
+    "node-fetch": "^2.1.1",
     "request-light": "^0.2.2",
-    "vscode-json-languageservice": "^3.0.7",
-    "vscode-languageclient": "^3.5.0",
-    "vscode-languageserver": "^3.5.0",
-    "vscode-nls": "^3.2.1"
+    "vscode-json-languageservice": "^3.0.12",
+    "vscode-languageclient": "^4.0.0",
+    "vscode-languageserver": "^4.0.0"
   },
   "devDependencies": {
     "@types/mocha": "^2.2.48",
-    "@types/node": "^9.4.6",
-    "@types/node-fetch": "1.6.7",
-    "mocha": "^5.0.1",
+    "@types/node": "^9.4.7",
+    "@types/node-fetch": "^1.6.7",
+    "mocha": "^5.0.4",
     "typescript": "^2.7.2",
-    "vscode": "^1.1.10"
+    "vscode": "^1.1.13"
   }
 }
