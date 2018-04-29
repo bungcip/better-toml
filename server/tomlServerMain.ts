@@ -24,12 +24,8 @@ import { JSONDocument, JSONSchema, LanguageSettings, LanguageServiceParams, Lang
 import { FileAssociationContribution } from './jsoncontributions/fileAssociationContribution';
 import { getLanguageModelCache } from './languageModelCache';
 
-// import * as toml from 'toml';
-// import {TomlSyntaxError} from 'toml';
-
 import * as bombadil from '@sgarciac/bombadil';
 import * as ct from 'ct';
-
 
 interface ISchemaAssociations {
 	[pattern: string]: string[];
