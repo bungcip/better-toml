@@ -1,17 +1,17 @@
 # better-toml README
 
-Better TOML is vs code extension to support TOML file.
+Better TOML is a VS Code extension to support TOML files.
 
 ## Features
 
-- Syntax Hightlighting for `.toml` files
+- Syntax Highlighting for `.toml` files
 
-![Syntax Hightlighting](images/feature_syntax_highlight.png)
+![Syntax Highlighting](images/feature_syntax_highlight.png)
 
 - Syntax Validation for invalid input
 
 ![Syntax Validation](images/feature_syntax_validation.gif)
 
-- Syntax Hightligting for markdown frontmatter
+- Syntax Highlighting for markdown frontmatter
 
 ![Frontmatter](images/feature_frontmatter.gif)
