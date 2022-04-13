@@ -1,3 +1,7 @@
+##
+This repository is archieved. I currently don't have time to maintain this project anymore. 
+I recommended to use https://marketplace.visualstudio.com/items?itemName=tamasfe.even-better-toml for better alternative.
+
 # better-toml README
 
 Better TOML is a VS Code extension to support TOML files.
