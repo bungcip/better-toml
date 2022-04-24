@@ -110,7 +110,7 @@
     "postinstall": "node ./node_modules/vscode/bin/install"
   },
   "dependencies": {
-    "@sgarciac/bombadil": "0.0.7",
+    "@sgarciac/bombadil": "2.3.0",
     "node-fetch": "^2.1.2",
     "request-light": "^0.2.2",
     "vscode-json-languageservice": "^3.1.0",
