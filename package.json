@@ -111,7 +111,7 @@
   },
   "dependencies": {
     "@sgarciac/bombadil": "0.0.7",
-    "node-fetch": "^2.1.2",
+    "node-fetch": "^3.1.1",
     "request-light": "^0.2.2",
     "vscode-json-languageservice": "^3.1.0",
     "vscode-languageclient": "^4.1.3",
